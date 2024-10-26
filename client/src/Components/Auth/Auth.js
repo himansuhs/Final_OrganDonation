@@ -7,8 +7,6 @@ import axios from "../Api";
 import mapboxgl from "mapbox-gl";
 import "./map.css";
 
-import { jsPDF } from "jspdf";
-
 const Auth = (props) => {
   axios.defaults.withCredentials = true;
 
@@ -140,25 +138,6 @@ const Auth = (props) => {
     }
   };
 
-  // const generatePDF = () => {
-  //   const doc = new jsPDF();
-
-  //   // Adding content to PDF
-  //   doc.text("Hello! This is a sample PDF.", 10, 10);
-
-  //   // Save the generated PDF
-  //   doc.save("sample.pdf");
-  // };
-
-  const generatePDF = () => {
-    const link = document.createElement("a");
-    link.href = "/assets/FORM.pdf"; // Update the path if necessary
-    link.download = "FormToBeFilled.pdf"; // The name for the downloaded file
-    document.body.appendChild(link);
-    link.click(); // Simulate a click on the link
-    document.body.removeChild(link); // Clean up the DOM
-  };
-
   const fetchGeo = async () => {
     await navigator.geolocation.getCurrentPosition(
       (p) => {
@@ -201,7 +180,7 @@ const Auth = (props) => {
                 {handle === "bank"
                   ? auth === 1
                     ? "Organ Bank Log In"
-                    : "Add Your Organ Bank"
+                    : "Add Your Organbank"
                   : handle === "donor"
                   ? "Donor"
                   : "Patient"}{" "}
@@ -228,7 +207,7 @@ const Auth = (props) => {
                       Details&nbsp;
                     </legend>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-3 gap-4">
                       <div className="col-span-2">
                         <label className="font-semibold leading-8">
                           {handle === "bank" && "Organ Bank "}Name:
@@ -244,7 +223,6 @@ const Auth = (props) => {
                           onChange={(e) => setName(e.target.value)}
                         />
                       </div>
-
                       {handle === "bank" ? (
                         <>
                           <div>
@@ -256,10 +234,11 @@ const Auth = (props) => {
                               type="text"
                               required
                               onChange={(e) => setHospital(e.target.value)}
+                              ś
                             />
                           </div>
                           <div>
-                            <label className="font-semibold leading-8">
+                            <label className="font-semibold  leading-8">
                               Contact Person:
                             </label>
                             <input
@@ -270,8 +249,8 @@ const Auth = (props) => {
                           </div>
                           <div>
                             <label
-                              htmlFor="category"
-                              className="font-semibold leading-8"
+                              for="category"
+                              className="font-semibold  leading-8"
                             >
                               Category:<font color="red">*</font>
                             </label>
@@ -287,7 +266,7 @@ const Auth = (props) => {
                             </select>
                           </div>
                           <div>
-                            <label className="font-semibold leading-8">
+                            <label className="font-semibold  leading-8">
                               Website:
                             </label>
                             <input
@@ -303,7 +282,7 @@ const Auth = (props) => {
                       {handle !== "bank" && (
                         <>
                           <div>
-                            <label className="font-semibold leading-8">
+                            <label className="font-semibold  leading-8">
                               Age:<font color="red">*</font>
                             </label>
                             <input
@@ -316,8 +295,8 @@ const Auth = (props) => {
                           </div>
                           <div>
                             <label
-                              htmlFor="gender"
-                              className="font-semibold leading-8"
+                              for="gender"
+                              className="font-semibold  leading-8"
                             >
                               Gender:<font color="red">*</font>
                             </label>
@@ -333,8 +312,8 @@ const Auth = (props) => {
                           </div>
                           <div>
                             <label
-                              htmlFor="blood"
-                              className="font-semibold leading-8"
+                              for="blood"
+                              className="font-semibold  leading-8"
                             >
                               Blood Group:<font color="red">*</font>
                             </label>
@@ -345,35 +324,31 @@ const Auth = (props) => {
                               className="w-full p-3 text-md border border-silver rounded"
                             >
                               {bloodGroups.map((e, i) => (
-                                <option value={i} key={i}>
-                                  {e}
-                                </option>
+                                <option value={i}>{e}</option>
                               ))}
                             </select>
                           </div>
-
                           <div>
                             <label
-                              htmlFor="organ"
-                              className="font-semibold leading-8"
+                              for="organ"
+                              className="font-semibold  leading-8"
                             >
                               Organ:<font color="red">*</font>
                             </label>
                             <select
-                              name="organ"
+                              name="blood"
                               id="state"
                               onChange={(e) => setOrgan(e.target.value)}
                               className="w-full p-3 text-md border border-silver rounded"
                             >
                               {organs.map((e, i) => (
-                                <option value={i} key={i}>
-                                  {e}
-                                </option>
+                                <option value={i}>{e}</option>
                               ))}
                             </select>
                           </div>
+
                           <div>
-                            <label className="font-semibold leading-8">
+                            <label className="font-semibold  leading-8">
                               Email:
                             </label>
                             <input
@@ -386,7 +361,7 @@ const Auth = (props) => {
                         </>
                       )}
                       <div>
-                        <label className="font-semibold leading-8">
+                        <label className="font-semibold  leading-8">
                           {auth === 0 ? "Mobile:" : "Username:"}
                           <font color="red">*</font>
                         </label>
@@ -398,10 +373,9 @@ const Auth = (props) => {
                           onChange={(e) => setPhone(e.target.value)}
                         />
                       </div>
-
-                      {handle === "bank" && (
+                      {handle == "bank" && (
                         <div>
-                          <label className="font-semibold leading-8">
+                          <label className="font-semibold  leading-8">
                             Email:
                           </label>
                           <font color="red">*</font>
@@ -414,7 +388,7 @@ const Auth = (props) => {
                         </div>
                       )}
                       <div>
-                        <label className="font-semibold leading-8">
+                        <label className="font-semibold  leading-8">
                           Password:
                         </label>
                         <font color="red">*</font>
@@ -428,31 +402,17 @@ const Auth = (props) => {
                           onChange={(e) => setPassword(e.target.value)}
                         />
                       </div>
-
-                      <div className="flex justify-center items-center mt-10">
-                        {handle !== "bank" && ( // Check if handle is not equal to an empty string
-                          <button
-                            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-                            onClick={generatePDF}
-                          >
-                            Download PDF
-                          </button>
-                        )}
-                      </div>
                     </div>
                   </fieldset>
                   <br />
                   <fieldset className="border border-solid border-gray-300 px-7 py-5 pb-7">
                     <legend className="text-2xl font-bold">
-                      &nbsp;{handle === "bank" && "Organ Bank "}Address&nbsp;
+                      &nbsp;{handle === "bank" && "Blood Bank "}Address&nbsp;
                     </legend>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label
-                          htmlFor="state"
-                          className="font-semibold leading-8"
-                        >
+                        <label for="state" className="font-semibold  leading-8">
                           State:<font color="red">*</font>
                         </label>
                         <select
@@ -465,9 +425,7 @@ const Auth = (props) => {
                           className="w-full p-3 text-md border border-silver rounded"
                         >
                           {data.states.map((e, i) => (
-                            <option value={i} key={i}>
-                              {e.state}
-                            </option>
+                            <option value={i}>{e.state}</option>
                           ))}
                         </select>
                       </div>
@@ -490,68 +448,124 @@ const Auth = (props) => {
                           ))}
                         </select>
                       </div>
-
                       <div className="col-span-2">
-                        <label className="font-semibold leading-8">
-                          Full Address:<font color="red">*</font>
+                        <label className="font-semibold  leading-8">
+                          Address:<font color="red">*</font>
                         </label>
                         <input
                           className="w-full p-3 text-md border border-silver rounded"
                           type="text"
-                          required
+                          placeholder="Enter your complete address"
                           onChange={(e) => setAddress(e.target.value)}
+                          required
                         />
                       </div>
                     </div>
+
+                    {handle == "bank" && (
+                      <>
+                        <br />
+                        <div>
+                          <label className="font-semibold leading-7">
+                            Location:<font color="red">*</font>
+                          </label>
+                        </div>
+                        <div
+                          style={{
+                            display: "grid",
+                            gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+                            gap: "1rem",
+                          }}
+                        >
+                          <div
+                            className="w-full"
+                            style={{ gridColumn: "2/4", gridRow: "1/3" }}
+                          >
+                            <div id="map" className="w-full h-[200px]"></div>
+                          </div>
+                          <div style={{ gridColumn: "1", gridRow: "1/2" }}>
+                            <input
+                              className="w-full p-3 text-md border border-silver rounded"
+                              type="number"
+                              step="0.01"
+                              placeholder="Latitude"
+                              disabled
+                              value={latitude}
+                              onChange={(e) => setLatitude(e.target.value)}
+                              required
+                            />
+                            <br />
+                            <br />
+                            <input
+                              className="w-full p-3 text-md border border-silver rounded"
+                              type="number"
+                              step="0.01"
+                              placeholder="Longitude"
+                              disabled
+                              value={longitude}
+                              onChange={(e) => setLongitude(e.target.value)}
+                              required
+                            />
+                            <button
+                              type="button"
+                              className="bg-purple text-center text-white-900 rounded-lg mt-4 px-4 py-2"
+                              onClick={() => fetchGeo()}
+                            >
+                              Fetch Geocode
+                            </button>
+                          </div>
+                        </div>
+                      </>
+                    )}
                   </fieldset>
                 </>
               ) : (
-                <fieldset className="border border-solid border-gray-300 px-7 py-5 pb-7">
-                  <legend className="text-2xl font-bold">
-                    &nbsp;{handle === "bank" ? "Organ Bank" : "User"} Log
-                    In&nbsp;
-                  </legend>
-
-                  <div className="grid grid-cols-1 gap-4">
-                    <div>
-                      <label className="font-semibold leading-8">
-                        Mobile:<font color="red">*</font>
-                      </label>
-                      <input
-                        className="w-full p-3 text-md border border-silver rounded"
-                        type="number"
-                        placeholder={handle !== "bank" && "Enter your mobile"}
-                        required
-                        onChange={(e) => setPhone(e.target.value)}
-                      />
-                    </div>
-                    <div>
-                      <label className="font-semibold leading-8">
-                        Password:<font color="red">*</font>
-                      </label>
-                      <input
-                        className="w-full p-3 text-md border border-silver rounded"
-                        type="password"
-                        placeholder={handle !== "bank" && "Enter your password"}
-                        required
-                        onChange={(e) => setPassword(e.target.value)}
-                      />
-                    </div>
+                <>
+                  <div>
+                    <label className="font-semibold  leading-8">
+                      Username:<font color="red">*</font>
+                    </label>
+                    <input
+                      className="w-full p-3 text-md border border-silver rounded"
+                      type="number"
+                      placeholder="Enter your mobile"
+                      required
+                      onChange={(e) => setPhone(e.target.value)}
+                    />
                   </div>
-                </fieldset>
+                  <br />
+                  <div>
+                    <label className="font-semibold  leading-8">
+                      Password:
+                    </label>
+                    <font color="red">*</font>
+                    <input
+                      className="w-full p-3 text-md border border-silver rounded"
+                      type="password"
+                      placeholder="Enter your password"
+                      required
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </div>
+                </>
               )}
+              <br />
+              <center>
+                <input
+                  type="submit"
+                  className={s1 + (auth === 0 && " w-4/12")}
+                  disabled={handle == "bank" && auth == 0 && longitude == 0}
+                  value={auth === 0 ? "Sign Up" : "Log In"}
+                />
+              </center>
             </fieldset>
-
-            <center>
-              <input
-                type="submit"
-                value={auth === 0 ? "Sign Up" : "Log In"}
-                className="bg-blue-500 text-white rounded px-4 py-2"
-              />
-            </center>
           </form>
         </div>
       </section>
+      <br />
+      <br />
+      <br />
+      <Outlet />
     </div>
   );
 };
