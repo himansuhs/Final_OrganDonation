@@ -13,10 +13,12 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(
   cors({
-    origin: ["https://final-organ-donation.vercel.app/"],
+    origin: ["https://final-organ-donation.vercel.app"],
     credentials: true,
   })
 );
+
+app.options("*", cors()); // Preflight request handling
 
 mongoose.connect(process.env.CONNECT, (e) => {
   console.log(e ? e : "Connected successfully to database");
